@@ -4,14 +4,14 @@ const bip32 = require('bip32')
 const bitcoin = require('bitcoinjs-lib')
 
 function run() {
-    const accounts = ['44', '49']
+    const accounts = ['44', '49', '84']
     const phrases = readPhrases()
     const depth = getDepth()
     const targetAddress = getAddress()
     for (const phrase of phrases) {
         for (const account of accounts) {
             for (let i = 0; i <= depth; i ++) {
-                const path = `m/${account}'/84'/0'/0'/0/${i}`
+                const path = `m/${account}'/0'/0'/0/${i}`
                 const seed = bip39.mnemonicToSeedSync(phrase)
                 const hdnode = bip32.fromSeed(seed)
                 const node = hdnode.derivePath(path)
